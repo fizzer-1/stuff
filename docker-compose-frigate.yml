@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  frigate:
+    container_name: frigate
+    restart: unless-stopped
+    stop_grace_period: 30s
+    image: ghcr.io/blakeblackshear/frigate:stable
+    volumes:
+      - /DATA/AppData/frigate/config:/config
+      - /DATA/AppData/frigate/media:/media
+    ports:
+      - "5000:5000"
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
